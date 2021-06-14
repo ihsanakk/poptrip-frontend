@@ -2,19 +2,19 @@
 
 
   <div class="card">
-    <router-link :to="{path: '/place/'+`${this.place.placeId}`}">
-      <img alt="" class="img-card" src="https://heytripster.com/wp-content/uploads/2020/05/the-best-restaurants-in-istanbul-min.jpg"/>
+    <router-link :to="{path: '/place/'+`${place.id}`}">
+      <img alt="" class="img-card" :src="place.imageUrl"/>
     </router-link>
     <div class="card-content">
       <h4 class="card-title">
-        {{place.placeName}}
+        {{place.placeTitle}}
       </h4>
       <p class="">
         {{place.placeDescription}}
       </p>
     </div>
     <div class="card-read-more">
-      <router-link to="/correspondingPlace/id" class="btn btn-outline-dark btn-block m-1">
+      <router-link :to="{path: '/place/'+`${place.id}`}" class="btn btn-outline-dark btn-block m-1">
         Read More
       </router-link>
     </div>
@@ -31,7 +31,6 @@ export default {
     }
   },
   props:{
-    // TODO placeType, placeName, placeDescription, placeImgURL, placeID(router, path etc.)
     place:{}
   },
   methods:{

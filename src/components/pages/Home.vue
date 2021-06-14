@@ -6,7 +6,7 @@
 
       <h3>Discover</h3>
       <hr>
-      <div v-for="place in places" :key="place.placeId" class="col-md-4 col-sm-4 col-lg-4">
+      <div v-for="place in discoverPlaces" :key="place.placeId" class="col-md-8 col-sm-8 col-lg-4">
         <PlaceCard :place="place"></PlaceCard>
       </div>
 
@@ -25,35 +25,18 @@
       <h3>Most Liked Restaurants</h3>
       <hr>
 
-      <div class="col-md-4 col-sm-4 col-lg-4">
-        <PlaceCard></PlaceCard>
-
+      <div v-for="place in mostLikedRestaurants" :key="place.placeId" class="col-md-4 col-sm-4 col-lg-4">
+        <PlaceCard :place="place"></PlaceCard>
       </div>
-      <div class="col-md-4 col-sm-4 col-lg-4">
-        <PlaceCard></PlaceCard>
 
-      </div>
-      <div class="col-md-4 col-sm-4 col-lg-4">
-        <PlaceCard></PlaceCard>
-
-      </div>
     </div>
 
     <div class="most-liked-hotels row mb-5">
       <h3>Most Liked Hotels</h3>
       <hr>
 
-      <div class="col-md-4 col-sm-4 col-lg-4">
-        <PlaceCard></PlaceCard>
-
-      </div>
-      <div class="col-md-4 col-sm-4 col-lg-4">
-        <PlaceCard></PlaceCard>
-
-      </div>
-      <div class="col-md-4 col-sm-4 col-lg-4">
-        <PlaceCard></PlaceCard>
-
+      <div v-for="place in mostLikedHotels" :key="place.placeId" class="col-md-4 col-sm-4 col-lg-4">
+        <PlaceCard :place="place"></PlaceCard>
       </div>
     </div>
 
@@ -66,6 +49,9 @@
 </template>
 
 <script>
+
+import PlaceService from '@/services/place.service'
+
 import PlaceCard from "@/components/shared/PlaceCard";
 export default {
   name: "Home",
@@ -75,35 +61,44 @@ export default {
       searchingValue:'',
     //  TODO mostLikedHotels[], mostLikedRestaurant[], discover[]
 
-      places:[
-        {
-          placeId:129,
-          placeName:"Concord",
-          placeDescription: "The most beautiful place all around world you can find"
-        },
-        {
-          placeId:361,
-          placeName:"Quad",
-          placeDescription: "The most beautiful place all around world you can find"
-        },
-        {
-          placeId:416,
-          placeName:"Franchise",
-          placeDescription: "The most beautiful place all around world you can find"
-        },
+      discoverPlaces:[],
+      mostLikedHotels:[],
+      mostLikedRestaurants:[]
 
-      ]
 
     }
+  },
+  created() {
+
+    PlaceService.discoverPlaces()
+    .then(res=> this.discoverPlaces = res.data)
+    .catch(err=>console.log(err));
+
+    PlaceService.getMostLikedHotels()
+    .then(res =>  this.mostLikedHotels=res.data)
+    .catch(err=>console.log(err));
+
+    PlaceService.getMostLikedRestaurants()
+    .then(res=> this.mostLikedRestaurants = res.data)
+    .catch(err=>console.log(err))
+
   },
   methods:{
     handleSearch(){
       if(this.searchingValue===''){
       //
       }else{
-        this.$router.push('/searchResult/'+`${this.searchingValue}`);
+        if(this.searchingValue.includes(' ')){
+          let newSearchingValue='';
+          newSearchingValue = this.searchingValue.replaceAll(" ", "-")
+          this.$router.push('/searchResult/'+`${newSearchingValue}`);
+        }else{
+          this.$router.push('/searchResult/'+`${this.searchingValue}`);
+        }
+
       }
-    }
+    },
+  // TODO Develop request services to fill place Arrays JSON Objects
   }
 }
 </script>

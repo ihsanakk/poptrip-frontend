@@ -14,7 +14,32 @@ export const router = new Router({
             meta:{
                 title: 'PopTrip'
             }
-        }
+        },
+        {
+            path: '/place/:id',
+            name: 'place',
+            component: () => import("@/components/pages/Place"),
+        },
+        {
+            path: '/searchResult/:keyword',
+            name: 'searchResult',
+            component: () => import("@/components/pages/SearchResult")
+        },
+        {
+            path: '/reviews',
+            name: 'reviews',
+            component: () => import("@/components/pages/Reviews")
+        },
+        {
+            path: '/restaurants',
+            name: 'restaurants',
+            component: () => import("@/components/pages/Restaurants")
+        },
+        {
+            path: '/hotels',
+            name: 'hotels',
+            component: () => import("@/components/pages/Hotels")
+        },
     ]
 
 })

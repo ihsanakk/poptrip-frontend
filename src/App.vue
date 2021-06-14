@@ -62,12 +62,21 @@ export default {
   data(){
     return{
       loggedIn:false
+
     }
   },
   components: {
 
 
+
   },
+
+  mounted() {
+
+
+
+  },
+
   watch:{
     '$route' : {
       // eslint-disable-next-line no-unused-vars
