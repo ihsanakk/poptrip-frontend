@@ -3,7 +3,7 @@
     <h3>HOTELS</h3>
     <hr>
     <div class="row">
-      <div class="col-4" v-for="hotel in hotels" :key="hotel.id">
+      <div class="col-4" v-for="hotel in getHotels" :key="hotel.id">
             <PlaceCard :place="hotel"></PlaceCard>
       </div>
     </div>
@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import PlaceService from '@/services/place.service'
 import PlaceCard from "@/components/shared/PlaceCard";
 export default {
   name: "Hotels",
@@ -24,10 +23,10 @@ export default {
       hotels:[]
     }
   },
-  created() {
-    PlaceService.getAllHotels()
-    .then(res=>this.hotels=res.data)
-    .catch(err=>console.log(err))
+  computed:{
+    getHotels(){
+      return this.$store.getters.getAllHotels
+    }
   }
 }
 </script>

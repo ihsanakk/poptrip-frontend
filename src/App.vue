@@ -70,6 +70,14 @@ export default {
 
 
   },
+  created() {
+    this.$store.dispatch('getHotels')
+    this.$store.dispatch('getRestaurants')
+    this.$store.dispatch('getMostLikedHotels')
+    this.$store.dispatch('getMostLikedRestaurants')
+    this.$store.dispatch('getDiscoverPlaces')
+    this.$store.dispatch('getLastReviews')
+  },
 
   mounted() {
 

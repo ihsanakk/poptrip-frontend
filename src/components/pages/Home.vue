@@ -6,7 +6,7 @@
 
       <h3>Discover</h3>
       <hr>
-      <div v-for="place in discoverPlaces" :key="place.placeId" class="col-md-8 col-sm-8 col-lg-4">
+      <div v-for="place in getDiscoverPlaces" :key="place.placeId" class="col-md-8 col-sm-8 col-lg-4">
         <PlaceCard :place="place"></PlaceCard>
       </div>
 
@@ -25,7 +25,7 @@
       <h3>Most Liked Restaurants</h3>
       <hr>
 
-      <div v-for="place in mostLikedRestaurants" :key="place.placeId" class="col-md-4 col-sm-4 col-lg-4">
+      <div v-for="place in getMostLikedRestaurants" :key="place.placeId" class="col-md-4 col-sm-4 col-lg-4">
         <PlaceCard :place="place"></PlaceCard>
       </div>
 
@@ -35,7 +35,7 @@
       <h3>Most Liked Hotels</h3>
       <hr>
 
-      <div v-for="place in mostLikedHotels" :key="place.placeId" class="col-md-4 col-sm-4 col-lg-4">
+      <div v-for="place in getMostLikedHotels" :key="place.placeId" class="col-md-4 col-sm-4 col-lg-4">
         <PlaceCard :place="place"></PlaceCard>
       </div>
     </div>
@@ -50,7 +50,6 @@
 
 <script>
 
-import PlaceService from '@/services/place.service'
 
 import PlaceCard from "@/components/shared/PlaceCard";
 export default {
@@ -59,28 +58,21 @@ export default {
   data(){
     return{
       searchingValue:'',
-    //  TODO mostLikedHotels[], mostLikedRestaurant[], discover[]
-
-      discoverPlaces:[],
-      mostLikedHotels:[],
-      mostLikedRestaurants:[]
-
 
     }
   },
+  computed:{
+    getMostLikedHotels(){
+      return this.$store.getters.getMostLikedHotels
+    },
+    getMostLikedRestaurants(){
+      return this.$store.getters.getMostLikedRestaurants
+    },
+    getDiscoverPlaces(){
+      return this.$store.getters.getDiscoverPlaces
+    }
+  },
   created() {
-
-    PlaceService.discoverPlaces()
-    .then(res=> this.discoverPlaces = res.data)
-    .catch(err=>console.log(err));
-
-    PlaceService.getMostLikedHotels()
-    .then(res =>  this.mostLikedHotels=res.data)
-    .catch(err=>console.log(err));
-
-    PlaceService.getMostLikedRestaurants()
-    .then(res=> this.mostLikedRestaurants = res.data)
-    .catch(err=>console.log(err))
 
   },
   methods:{
@@ -98,7 +90,6 @@ export default {
 
       }
     },
-  // TODO Develop request services to fill place Arrays JSON Objects
   }
 }
 </script>

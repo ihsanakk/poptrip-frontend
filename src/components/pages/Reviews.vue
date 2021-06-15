@@ -7,7 +7,7 @@
         <div class="col-md-8 col-sm-8 col col-lg-8">
           <h3>Last Reviews</h3>
           <hr>
-          <div v-for="review in lastReviews" :key="review.id">
+          <div v-for="review in getLastReviews" :key="review.id">
             <ReviewCard :review="review"></ReviewCard>
           </div>
         </div>
@@ -15,7 +15,7 @@
         <div class="col">
           <h2 class="d-flex justify-content-center">Most Rated</h2>
           <div class="section-right">
-              <div style="height: 600px; background: dimgrey"></div>
+
           </div>
 
         </div>
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import ReviewService from '@/services/review.service'
 import ReviewCard from "@/components/shared/ReviewCard";
 export default {
   name: "Reviews",
@@ -36,12 +35,17 @@ export default {
   data(){
     return{
       lastReviews:[],
+      mostRated:[]
+    }
+  },
+  computed:{
+    getLastReviews(){
+      return this.$store.getters.getLastReviews
     }
   },
   created() {
-    ReviewService.getLastReviews()
-    .then(res=>this.lastReviews = res.data)
-    .catch(err=>console.log(err))
+
+
   }
 }
 </script>
@@ -49,6 +53,5 @@ export default {
 <style scoped>
 .section-right{
   padding-left: 10px;
-  border-left: 1px solid #ced4da;
 }
 </style>
