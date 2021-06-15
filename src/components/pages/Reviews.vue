@@ -1,3 +1,25 @@
+<script>
+import ReviewCard from "@/components/shared/ReviewCard";
+export default {
+  name: "Reviews",
+  components: {ReviewCard},
+  data(){
+    return{
+      lastReviews:[],
+      mostRated:[]
+    }
+  },
+  computed:{
+    getLastReviews(){
+      return this.$store.getters.getLastReviews
+    }
+  },
+  created() {
+
+
+  }
+}
+</script>
 <template>
   <div>
 
@@ -26,29 +48,6 @@
 
   </div>
 </template>
-
-<script>
-import ReviewCard from "@/components/shared/ReviewCard";
-export default {
-  name: "Reviews",
-  components: {ReviewCard},
-  data(){
-    return{
-      lastReviews:[],
-      mostRated:[]
-    }
-  },
-  computed:{
-    getLastReviews(){
-      return this.$store.getters.getLastReviews
-    }
-  },
-  created() {
-
-
-  }
-}
-</script>
 
 <style scoped>
 .section-right{

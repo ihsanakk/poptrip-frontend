@@ -1,18 +1,3 @@
-<template>
-  <div>
-    <h3>HOTELS</h3>
-    <hr>
-    <div class="row">
-      <div class="col-4" v-for="hotel in getHotels" :key="hotel.id">
-            <PlaceCard :place="hotel"></PlaceCard>
-      </div>
-    </div>
-
-
-
-  </div>
-</template>
-
 <script>
 import PlaceCard from "@/components/shared/PlaceCard";
 export default {
@@ -30,7 +15,20 @@ export default {
   }
 }
 </script>
+<template>
+  <div>
+    <h3>HOTELS</h3>
+    <hr>
+    <div class="row">
+      <div class="col-4" v-for="hotel in getHotels" :key="hotel.id">
+        <PlaceCard :place="hotel"></PlaceCard>
+      </div>
+    </div>
 
+
+
+  </div>
+</template>
 <style scoped>
 
 </style>

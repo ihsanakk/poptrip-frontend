@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <small v-if="review.createdAt" class="text-muted">{{review.createdAt}}</small>
+      <small v-if="review.createdAt" class="text-muted">{{convertDateFormat(review.createdAt)}}</small>
       <br>
       <small v-if="review.updateAt" class="text-muted">{{this.calculateUpdatedTime(review.updateAt)}}</small>
     </div>
@@ -28,6 +28,13 @@ export default {
     review:{}
   },
   methods:{
+    convertDateFormat(placeDate){
+
+      let createdDate =  new Date(placeDate);
+      let dateFormat = createdDate.getDay() +'/'+ createdDate.getMonth() +'/'+ createdDate.getFullYear();
+      return dateFormat
+
+    },
     calculateUpdatedTime(updateDate){
       let then = new Date(updateDate);
       let now = new Date();

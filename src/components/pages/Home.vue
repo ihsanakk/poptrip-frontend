@@ -1,3 +1,47 @@
+<script>
+import PlaceCard from "@/components/shared/PlaceCard";
+export default {
+  name: "Home",
+  components: {PlaceCard},
+  data(){
+    return{
+      searchingValue:'',
+
+    }
+  },
+  computed:{
+    getMostLikedHotels(){
+      return this.$store.getters.getMostLikedHotels
+    },
+    getMostLikedRestaurants(){
+      return this.$store.getters.getMostLikedRestaurants
+    },
+    getDiscoverPlaces(){
+      return this.$store.getters.getDiscoverPlaces
+    }
+  },
+  created() {
+
+  },
+  methods:{
+    handleSearch(){
+      if(this.searchingValue===''){
+      //
+      }else{
+        if(this.searchingValue.includes(' ')){
+          let newSearchingValue='';
+          newSearchingValue = this.searchingValue.replaceAll(" ", "-")
+          this.$router.push('/searchResult/'+`${newSearchingValue}`);
+        }else{
+          this.$router.push('/searchResult/'+`${this.searchingValue}`);
+        }
+
+      }
+    },
+  }
+}
+</script>
+
 <template>
 
   <div>
@@ -47,53 +91,6 @@
   </div>
 
 </template>
-
-<script>
-
-
-import PlaceCard from "@/components/shared/PlaceCard";
-export default {
-  name: "Home",
-  components: {PlaceCard},
-  data(){
-    return{
-      searchingValue:'',
-
-    }
-  },
-  computed:{
-    getMostLikedHotels(){
-      return this.$store.getters.getMostLikedHotels
-    },
-    getMostLikedRestaurants(){
-      return this.$store.getters.getMostLikedRestaurants
-    },
-    getDiscoverPlaces(){
-      return this.$store.getters.getDiscoverPlaces
-    }
-  },
-  created() {
-
-  },
-  methods:{
-    handleSearch(){
-      if(this.searchingValue===''){
-      //
-      }else{
-        if(this.searchingValue.includes(' ')){
-          let newSearchingValue='';
-          newSearchingValue = this.searchingValue.replaceAll(" ", "-")
-          this.$router.push('/searchResult/'+`${newSearchingValue}`);
-        }else{
-          this.$router.push('/searchResult/'+`${this.searchingValue}`);
-        }
-
-      }
-    },
-  }
-}
-</script>
-
 <style scoped>
 .form-control:focus {
   color: #495057;
