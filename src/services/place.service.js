@@ -13,8 +13,8 @@ class PlaceService {
         return axios.get(BASE_URL + 'getAllPlaces')
     }
 
-    getAllPlacesPageable() {
-        return axios.get(BASE_URL + 'getAllPlacesPageable')
+    getAllPlacesPageable(pageNo, pageSize) {
+        return axios.get(BASE_URL + 'getAllPlacesPageable',{params:{pageNo:pageNo, pageSize:pageSize}})
     }
 
     getPlaceReviews(id) {
@@ -22,24 +22,24 @@ class PlaceService {
     }
 
 
-    getPlaceReviewsPageable(id) {
-        return axios.get(BASE_URL + 'getPlaceReviewsPageable/' + id)
+    getPlaceReviewsPageable(id, pageNo, pageSize) {
+        return axios.get(BASE_URL + 'getPlaceReviewsPageable/' + id,{params:{pageNo:pageNo, pageSize:pageSize}})
     }
 
     getAllHotels() {
         return axios.get(BASE_URL + 'getAllHotels')
     }
 
-    getAllHotelsPageable() {
-        return axios.get(BASE_URL + 'getAllHotelsPageable')
+    getAllHotelsPageable(pageNo, pageSize) {
+        return axios.get(BASE_URL + 'getAllHotelsPageable',{params:{pageNo:pageNo,pageSize:pageSize}})
     }
 
     getAllRestaurants() {
         return axios.get(BASE_URL + 'getAllRestaurants')
     }
 
-    getAllRestaurantsPageable() {
-        return axios.get(BASE_URL + 'getAllRestaurantsPageable')
+    getAllRestaurantsPageable(pageNo,pageSize) {
+        return axios.get(BASE_URL + 'getAllRestaurantsPageable', {params:{pageNo:pageNo, pageSize:pageSize}})
     }
 
     discoverPlaces() {

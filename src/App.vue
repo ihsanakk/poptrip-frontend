@@ -30,16 +30,16 @@
 
             <div class="nav-item dropdown me-2">
 <!--              guest-->
-              <router-link to="/login" v-if="!loggedIn" class="btn btn-outline-dark login">Login</router-link>
+              <router-link to="/login" v-if="!isLoggedIn" class="btn btn-outline-dark login">Login</router-link>
 <!--              logged in-->
-              <a v-if="loggedIn" class="nav-link btn dropdown" id="profile-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <a v-if="isLoggedIn" class="nav-link btn dropdown" id="profile-dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <img class="profile-image" src=" https://via.placeholder.com/30" alt="">
               </a>
               <ul class="dropdown-menu" aria-labelledby="profile-dropdown">
                 <li><router-link to="/profile" class="dropdown-item" >Profile</router-link></li>
                 <li><router-link to="/reviewed" class="dropdown-item" >Reviewed</router-link></li>
                 <li><router-link to="/settings" class="dropdown-item" >Settings</router-link></li>
-                <li><router-link to="/logout" class="dropdown-item" >Logout</router-link></li>
+                <li><router-link to="/login" class="dropdown-item" @click.prevent="logout()">Logout</router-link></li>
               </ul>
             </div>
           </div>
@@ -56,14 +56,29 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
   data(){
     return{
-      loggedIn:false
+      user: {},
+      loggedIn: false
 
     }
+  },
+  methods:{
+
+    logout(){
+      this.$store.dispatch('logout');
+    }
+
+  },
+  computed:{
+
+    isLoggedIn(){
+      return this.$store.state.auth.user;
+    }
+
+
   },
   components: {
 
@@ -76,7 +91,7 @@ export default {
     this.$store.dispatch('getMostLikedHotels')
     this.$store.dispatch('getMostLikedRestaurants')
     this.$store.dispatch('getDiscoverPlaces')
-    this.$store.dispatch('getLastReviews')
+    // this.$store.dispatch('getLastReviews')
   },
 
   mounted() {

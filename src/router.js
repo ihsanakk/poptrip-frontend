@@ -16,6 +16,11 @@ export const router = new Router({
             }
         },
         {
+          path: '/me',
+          name: 'profile',
+          component: () => import('@/components/pages/Profile')
+        },
+        {
             path: '/place/:id',
             name: 'place',
             component: () => import("@/components/pages/Place"),
@@ -40,6 +45,11 @@ export const router = new Router({
             name: 'hotels',
             component: () => import("@/components/pages/Hotels")
         },
+        {
+            path:'/login',
+            name:'login',
+            component: () => import('@/components/pages/Login')
+        }
     ]
 
 })
